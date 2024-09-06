@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uchiha Home</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+  <nav>
+    <div class="logo">Uchiha</div>
+    <div class="menu">
+      <a href="home.html">Home</a>
+      <a href="register.html">Register</a>
+      <a href="index.html">Login</a>
+      <a href="profile.html">Profile</a>
+      <a href="#" onclick="logout()">Logout</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h2>Uchiha File Storage</h2>
+
+    <!-- File Upload Section -->
+    <div class="file-upload">
+      <h3>Upload File, Video, or Document</h3>
+      <input type="file" id="fileInput">
+      <button onclick="uploadFile()">Upload</button>
+    </div>
+
+    <!-- File Sections -->
+    <div id="filesSection">
+      <h3>Files</h3>
+      <ul id="fileItems"></ul>
+    </div>
+
+    <div id="videosSection">
+      <h3>Videos</h3>
+      <ul id="fileItems"></ul>
+    </div>
+
+    <div id="documentsSection">
+      <h3>Documents</h3>
+      <ul id="fileItems"></ul>
+    </div>
+  </div>
+
+  <!-- Connect the JavaScript file -->
+  <script src="home.js"></script>
+</body>
+</html>

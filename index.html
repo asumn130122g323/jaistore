@@ -3,16 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uchiha Login</title>
+    <title>Uchiha Portal</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">Uchiha</div>
+        <div class="menu">
+            <a href="index.html">Login</a>
+            <a href="register.html">Register</a>
+            <a href="home.html">Home</a>
+            <a href="#" onclick="logout()">Logout</a>
+        </div>
+    </nav>
+
+    <!-- Login Section -->
     <div class="box">
         <img src="kakashi logo.jpg" class="user" alt="User Logo">
         <h1>Login Uchiha Page Here</h1>
         <form name="uchihaform" onsubmit="return validateLoginForm()">
-            <p>User Name</p>
-            <input type="text" name="uname" placeholder="Enter Username" required>
+            <p>Email</p>
+            <input type="text" name="email" placeholder="Enter your email" required>
             <p>Password</p>
             <input type="password" name="upswd" placeholder="Enter password" required>
             <div id="errorBox"></div>
@@ -21,5 +33,30 @@
             <a href="register.html">Register for new account?</a>
         </form>
     </div>
+
+    <!-- File Upload Section (only visible when logged in) -->
+    <div class="container" style="display:none;" id="fileContainer">
+        <h2>Uchiha File Storage</h2>
+        <div class="file-upload">
+            <h3>Upload File, Video, or Document</h3>
+            <input type="file" id="fileInput">
+            <button onclick="uploadFile()">Upload</button>
+        </div>
+        <div id="filesSection">
+            <h3>Files</h3>
+            <ul id="fileItems"></ul>
+        </div>
+        <div id="videosSection">
+            <h3>Videos</h3>
+            <ul id="fileItems"></ul>
+        </div>
+        <div id="documentsSection">
+            <h3>Documents</h3>
+            <ul id="fileItems"></ul>
+        </div>
+    </div>
+
+    <script src="home.js"></script>
 </body>
 </html>
+
