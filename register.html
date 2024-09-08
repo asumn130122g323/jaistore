@@ -10,6 +10,7 @@
     <div class="box">
         <img src="kakashi logo.jpg" class="user" alt="User Logo">
         <h1>Register Here</h1>
+        <form name="myform2" action="register.php" method="POST">
         <form name="myform2" onsubmit="return validateRegisterForm()" method="POST" action="register.php">
             <p>Enter your name</p>
             <input type="text" name="uname1" placeholder="Enter your name" required>
@@ -19,9 +20,10 @@
             <input type="password" name="upswd1" placeholder="Enter Password" required>
             <p>Confirm Password</p>
             <input type="password" name="upswd2" placeholder="Retype-Password" required>
-            <input type="submit" value="Register">
+            <input type="submit" name="" value="Register">
             <br><br>
             <a href="index.html">Existing user, Login !?</a>
+        </form>
         </form>
     </div>
 </body>
