@@ -45,13 +45,15 @@ else{
       $stmt->bind_param("ssss", $uname1,$email,$upswd1,$upswd2);
       $stmt->execute();
       echo "New record inserted sucessfully";
-     } else {
+     } 
+     else {
       echo "Someone already register using this email";
      }
      $stmt->close();
      $conn->close();
     }
-} else {
+} 
+else {
  echo "All field are required";
  die();
 }

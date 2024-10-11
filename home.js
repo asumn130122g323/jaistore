@@ -1,56 +1,108 @@
 let files = [];
 
-function uploadFile() {
-    const fileInput = document.getElementById('fileInput');
-    const file = fileInput.files[0];
+const products = [
+  { id: 1, name: 'Naruto T-Shirt', price: 250, image: 'narutotsh.jpeg' },
+  { id: 2, name: 'One Piece Hoodie', price: 799, image: 'onepieceh.jpeg' },
+  { id: 3, name: 'Attack on Titan Shoes', price: 499, image: 'shoeaot.jpeg' },
+  { id: 4, name: 'My Hero Academia Accessory', price: 200, image: 'acessmha.jpeg' },
+  { id: 5, name: 'Dragon Ball Z Track Pants', price: 350, image: 'tra.jpeg' },
+  { id: 6, name: 'Demon Slayer Shorts', price: 199, image: 'shorts.jpeg' },
+  { id: 7, name: 'Jujutsu Kaisen Cotton Pants', price: 899, image: 'cottonpant.jpeg' },
+];
+const cart = [];
+function displayProducts() {
+  const productList = document.getElementById('product-list');
+  productList.innerHTML = '';
 
-    if (file) {
-        const fileURL = URL.createObjectURL(file);
-        const fileType = file.type;
-
-        // Classify files into types
-        if (fileType.startsWith('image/') || fileType.startsWith('application/')) {
-            files.push({ name: file.name, url: fileURL, type: 'document' });
-        } else if (fileType.startsWith('video/')) {
-            files.push({ name: file.name, url: fileURL, type: 'video' });
-        } else {
-            files.push({ name: file.name, url: fileURL, type: 'file' });
-        }
-
-        displayFiles();
-        fileInput.value = ''; // Reset the input
-    }
+  products.forEach(product => {
+    const productElement = document.createElement('div');
+    productElement.classList.add('product');
+    productElement.innerHTML = `
+      <img src="${product.image}" alt="${product.name}">
+      <h3>${product.name}</h3>
+      <p>₹${product.price.toFixed(2)}</p>
+      <button onclick="addToCart(${product.id})">Add to Cart</button>
+    `;
+    productList.appendChild(productElement);
+  });
 }
 
-function displayFiles() {
-    const filesSection = document.getElementById('filesSection');
-    const videosSection = document.getElementById('videosSection');
-    const documentsSection = document.getElementById('documentsSection');
-
-    filesSection.innerHTML = '';
-    videosSection.innerHTML = '';
-    documentsSection.innerHTML = '';
-
-    files.forEach((file, index) => {
-        const li = document.createElement('li');
-        li.innerHTML = `<a href="${file.url}" download="${file.name}">${file.name}</a> <button onclick="deleteFile(${index})">Delete</button>`;
-
-        if (file.type === 'file') {
-            filesSection.appendChild(li);
-        } else if (file.type === 'video') {
-            videosSection.appendChild(li);
-        } else if (file.type === 'document') {
-            documentsSection.appendChild(li);
-        }
-    });
+function addToCart(productId) {
+  const product = products.find(p => p.id === productId);
+  if (product) {
+    cart.push(product);
+    updateCart();
+  }
 }
 
-function deleteFile(index) {
-    files.splice(index, 1);
-    displayFiles();
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  updateCart();
+}
+
+function updateCart() {
+  const cartItems = document.getElementById('cart-items');
+  const cartCount = document.getElementById('cart-count');
+  const totalAmount = document.getElementById('total-amount');
+
+  cartItems.innerHTML = '';
+  cartCount.textContent = cart.length;
+
+  let total = 0;
+  cart.forEach((item, index) => {
+    const itemElement = document.createElement('div');
+    itemElement.classList.add('cart-item');
+    itemElement.innerHTML = `
+      <span>${item.name} - ₹${item.price.toFixed(2)}</span>
+      <button onclick="removeFromCart(${index})">Remove</button>
+    `;
+    cartItems.appendChild(itemElement);
+    total += item.price;
+  });
+
+  totalAmount.textContent = total.toFixed(2);
+}
+
+function showPaymentMethod() {
+  if (cart.length === 0) {
+    alert('Your cart is empty!');
+    return;
+  }
+  document.getElementById('payment').style.display = 'block';
+}
+
+function cancelPayment() {
+  document.getElementById('payment').style.display = 'none';
+}
+
+function checkout() {
+  const cardNumber = document.getElementById('card-number').value;
+  const expiryDate = document.getElementById('expiry-date').value;
+  const cvv = document.getElementById('cvv').value;
+
+  if (!cardNumber || !expiryDate || !cvv) {
+    alert('Please fill in all payment details.');
+    return;
+  }
+
+  const total = cart.reduce((sum, item) => sum + item.price, 0);
+  alert(`Payment successful! Total amount: ₹${total.toFixed(2)}`);
+  cart.length = 0;
+  updateCart();
+  cancelPayment();
 }
 
 function logout() {
-    alert('You have logged out.');
+  alert('You have been logged out.');
+  // Additional logout functionality can be implemented here
 }
 
+// Initialize the page
+displayProducts();
+updateCart();
+
+// Add event listener for payment form submission
+document.getElementById('payment-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  checkout();
+});

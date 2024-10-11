@@ -1,16 +1,20 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uchiha Home</title>
+    <title>Uchiha_Jai Anime Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="home.css">
 </head>
 <body>
   <nav>
-    <div class="logo">Uchiha</div>
+    <div class="logo">Uchiha_jai Anime Store</div>
     <div class="menu">
-      <a href="home.html">Home</a>
+      <a href="#home">Home</a>
+      <a href="#products">Products</a>
+      <a href="#cart">Cart (<span id="cart-count">0</span>)</a>
       <a href="register.html">Register</a>
       <a href="index.html">Login</a>
       <a href="profile.html">Profile</a>
@@ -18,34 +22,39 @@
     </div>
   </nav>
 
-  <div class="container">
-    <h2>Uchiha File Storage</h2>
+  <main>
+    <section id="home">
+      <h1>Welcome to Uchiha_Jai Anime Store</h1>
+      <p>Find the best anime merchandise here! Don't miss it!</p>
+    </section>
 
-    <!-- File Upload Section -->
-    <div class="file-upload">
-      <h3>Upload File, Video, or Document</h3>
-      <input type="file" id="fileInput">
-      <button onclick="uploadFile()">Upload</button>
-    </div>
+    <section id="products">
+      <h2>Our Products</h2>
+      <div id="product-list"></div>
+    </section>
 
-    <!-- File Sections -->
-    <div id="filesSection">
-      <h3>Files</h3>
-      <ul id="fileItems"></ul>
-    </div>
+    <section id="cart">
+      <h2>Your Cart</h2>
+      <div id="cart-items"></div>
+      <div id="cart-total">Total: ₹<span id="total-amount">0</span></div>
+      <button onclick="showPaymentMethod()">Proceed to Payment</button>
+    </section>
 
-    <div id="videosSection">
-      <h3>Videos</h3>
-      <ul id="fileItems"></ul>
-    </div>
+    <section id="payment" style="display: none;">
+      <h2>Payment Method</h2>
+      <form id="payment-form">
+        <label for="card-number">Card Number:</label>
+        <input type="text" id="card-number" required>
+        <label for="expiry-date">Expiry Date:</label>
+        <input type="text" id="expiry-date" placeholder="MM/YY" required>
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" required>
+        <button type="submit">Pay Now</button>
+      </form>
+      <button onclick="cancelPayment()">Cancel Payment</button>
+    </section>
+  </main>
 
-    <div id="documentsSection">
-      <h3>Documents</h3>
-      <ul id="fileItems"></ul>
-    </div>
-  </div>
-
-  <!-- Connect the JavaScript file -->
   <script src="home.js"></script>
 </body>
 </html>
